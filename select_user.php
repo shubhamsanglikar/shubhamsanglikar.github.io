@@ -14,7 +14,7 @@ $list = $query->fetchAll();
 
 foreach ($list as $rs) {
 	// put in bold the written text
-	echo "username='".$rs['username']."'";
+	//echo "username='".$rs['username']."'";
 	echo "<div class='card col-md-12'>";
 	
 	echo "<div class='col-md-11' style='margin:10px'>";
