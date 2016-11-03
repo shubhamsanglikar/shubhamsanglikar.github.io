@@ -1,0 +1,18 @@
+
+.exam-header {
+	width:100%;
+	padding:3px;
+	border: 1px solid #000;
+	background-color:#ebebe0;
+}
+
+.exam-header  h4{
+	font-weight:bold;
+	margin-left:20px;
+	
+}
+
+.inner-container{
+	border: 1px solid #000;
+	padding-bottom:30px;
+}

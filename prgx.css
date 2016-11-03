@@ -1,0 +1,29 @@
+@CHARSET "ISO-8859-1";
+
+div {
+    display: block;
+}
+#wrapper {
+    width: 400px;
+    height:400px;
+}
+
+#first {
+    float:left;
+    width: 33%;
+    height: 100%;
+    
+}
+
+#second {
+    float:left;
+    width: 67%;
+    height: 30%;
+    
+}
+
+#third {
+    float:left;
+    width: 67%;
+    height: 750%;
+}
