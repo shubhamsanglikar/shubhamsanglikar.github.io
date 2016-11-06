@@ -33,17 +33,41 @@ function set_item(item) {
 		data: {'keyword':item},
 		success:function(data){
 			//$('#country_list_id').show();
-			$('#country_list_id').html(data);
+		var arr = jQuery.parseJSON(data);
+		
+		
+		var htmltext="<div class='card col-md-12'> " +
+		
+		"<div class='col-md-11' style='padding:10px'>" +
+		"<div class='text-center col-md-4' style='padding:10px'><b>" +
+		arr['username'] +
+		"</b></div>" +
+		"<div class='text-center col-md-4' style='padding:10px'><b>" +
+		arr['u_designation'] +
+		"</b></div>" +
+		"<select name='selectname'><option value='admin'>Admin</option><option value='viewer' >Viewer</option><option value='writer'>Writer</option></select>"+
+		"<div class='text-center col-md-2' ><button class='btn' id='editbtn'><i class='fa fa-pencil' aria-hidden='true'> </i> Update</button></div>" +
+		"<div class='text-center col-md-2' ><button class='btn' id='deletebtn'><i class='fa fa-times' aria-hidden='true'> </i> Delete</button></div>" +
+		"</div>" +
+		"</div>" +
+		"<br></div>";
+		
+		
+			$('#country_list_id').html(htmltext);
+			$( "#editbtn" ).click(function() {
+				 update_user(arr);
+			});
 		}
 	});
 	
 }
 
 
-function update_user(){
-	alert("sdfdfs");
-	var htmldata= "<div>sdsf </div>";
-	$('#testdiv').html(htmldata);
+function update_user(arr){
+	alert(arr);
+	var htmltext="<div class='card col-md-12'> " +
+	"<div class='col-md-11' style='margin:10px'>" +
+	$('#testdiv').html(htmltext);
 	
 	
 }

@@ -22,17 +22,9 @@ echo "<script type='text/javascript'>
 <body>
     <div class="container">
        
-            <form>
-                <div class="label_div">Type a keyword : </div>
-                <div class="input_container">
-                    <input type="text" id="country_id" autocomplete="off" onkeyup="autocomplet()">
-                    <ul id="country_list_id"></ul>
-                    <div id='testdiv'>...</div>
-                </div>
-            </form>
-        </div><!-- content -->    
-        
-        
+            <div class="input-field col-md-12"><input id="country_id" type="text" autocomplete="off" onkeyup="autocomplet()"></input><label  for="country_id">Search User</label></div>
+			<ul id="country_list_id"></ul>
+			<div id='testdiv'>...</div>
     </div><!-- container -->
     
 </body>

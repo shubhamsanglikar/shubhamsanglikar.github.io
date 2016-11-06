@@ -65,7 +65,7 @@ echo "<script type='text/javascript'>
 			</div>
 			
 			<br>
-							<input type="submit" value="Add" name="submit"class="waves-effect waves-light btn"></input>
+							<input type="submit" value="Add" name="submit" class="waves-effect waves-light btn"></input>
 			
 		</form>
 	

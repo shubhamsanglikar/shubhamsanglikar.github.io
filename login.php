@@ -12,6 +12,7 @@ if(isset($submit)){
 		$t=mysql_fetch_row($des);
 		 
 		 $_SESSION['designation']=$t[0];
+		 $_SESSION['username']=$username;
 		header("Location:home.php");
 		exit;
 	}
@@ -75,7 +76,7 @@ if(isset($submit)){
 		  }
 		  ?>
 		  <br>
-				<input type="submit" value="Login" class="waves-effect waves-light btn" name="submit"></input>
+				<button type="submit" value="Login" class="waves-effect waves-light btn" name="submit">Login</button>
 			</div>
 
 		</div>

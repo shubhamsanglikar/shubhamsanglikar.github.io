@@ -6,7 +6,7 @@ function connect() {
 
 $pdo = connect();
 $keyword = $_POST['keyword'];
-$sql = "SELECT * FROM users WHERE username = '$keyword' LIMIT 1";
+$sql = "SELECT embed_code from reports where report_name = '$keyword'";
 $query = $pdo->prepare($sql);
 //$query->bindParam(':keyword', $keyword, PDO::PARAM_STR);
 $query->execute();
@@ -17,9 +17,9 @@ foreach ($list as $rs) {
 	// put in bold the written text
 	//echo "username='".$rs['username']."'";
 	
-	$arr = $rs;
+	$arr = $rs['embed_code'];
 	
-	echo json_encode($arr);
+	echo $arr;
 }
 
 ?>
