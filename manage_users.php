@@ -23,8 +23,8 @@ echo "<script type='text/javascript'>
     <div class="container">
        
             <div class="input-field col-md-12"><input id="country_id" type="text" autocomplete="off" onkeyup="autocomplet()"></input><label  for="country_id">Search User</label></div>
-			<ul id="country_list_id"></ul>
-			<div id='testdiv'>...</div>
+			<div id="country_list_id"></div>
+			
     </div><!-- container -->
     
 </body>

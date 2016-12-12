@@ -18,11 +18,9 @@ foreach ($list as $rs) {
 	// add new option
     //echo '<li onclick="set_item(\''.str_replace("'", "\'", $rs['username']).'\')">'.$user_name.'</li>';
 			echo "<div class='col-md-9' style='margin:10px'>";
-			echo '<li onclick="set_item(\''.str_replace("'", "\'", $rs['username']).'\')">'.$user_name.'</li>';
+			echo '<div onclick="set_item(\''.str_replace("'", "\'", $rs['username']).'\')">'.$user_name.'</div>';
 			echo "</div>";
-			echo "<div class='col-md-2' style='margin:10px; text-align:' >";
-			echo "<i color='red' class='fa fa-times' aria-hidden='true'></i>";
-			echo "</div>";
+			
 			
 }
 

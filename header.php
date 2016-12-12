@@ -20,6 +20,9 @@
 </head>
 <body>
 <?php
+if(empty($_SESSION['username'])){
+	header("Location:login.php?logout=success");
+}
 $isAdmin=0;
 
 	if($_SESSION['designation']=="admin")
@@ -40,26 +43,24 @@ $isAdmin=0;
 					<li class="parent 1">
 						<a href="#">Clients</a>
 						<ul class="sub-menu">
-							<li><a href="add_clients.php"><i class="icon-plus"></i> Add </a></li>
-							<li><a href="#"><i class="icon-minus"></i> MOdify</a></li>
-							<li><a href="#"><i class="icon-multiply"></i> Delete</a></li>
+							<li><a href="add_clients.php"> Add </a></li>
+							<li><a href="#"> Modify</a></li>
+							<li><a href="#"> Delete</a></li>
 							
 						</ul>
 					</li>
 					<li class="parent 2">
 						<a href="#">Build</a>
 						<ul class="sub-menu">
-							<li><a href="#"><i class="icon-plus"></i> Add </a></li>
-							<li><a href="#"><i class="icon-minus"></i> MOdify</a></li>
-							<li><a href="#"><i class="fa-trash"></i> Delete</a></li>
+							
 						</ul>
 					</li>
 					<li class="parent 3">
 						<a href="#">Reports</a>
 						<ul class="sub-menu">
-							<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Large Image</a></li>
-							<li><a href="http://www.freshdesignweb.com/responsive-drop-down-menu-jquery-css3-using-icon-symbol.html">Medium Image</a></li>
-							</ul>
+							<li><a href="report_test.php"> Create Reports </a></li>
+							<li><a href="#"> View Reports</a></li>
+						</ul>
 					</li>
 					<li class="parent 4">
 						<a href="#">Account</a>

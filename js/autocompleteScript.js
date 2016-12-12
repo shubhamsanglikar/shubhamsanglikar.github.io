@@ -7,7 +7,7 @@ function autocomplet() {
 	var keyword = $('#country_id').val();
 	if (keyword.length >= min_length) {
 		$.ajax({
-			url: 'auto_suggest_search.php',
+			url: 'auto_suggest_search.php',	
 			type: 'POST',
 			data: {'keyword':keyword},
 			success:function(data){
@@ -42,20 +42,18 @@ function set_item(item) {
 		"<div class='text-center col-md-4' style='padding:10px'><b>" +
 		arr['username'] +
 		"</b></div>" +
-		"<div class='text-center col-md-4' style='padding:10px'><b>" +
-		arr['u_designation'] +
-		"</b></div>" +
-		"<select name='selectname'><option value='admin'>Admin</option><option value='viewer' >Viewer</option><option value='writer'>Writer</option></select>"+
+		"<div class='col-md-4'><select id='selectname' class='browser-default' name='selectname'><option value='admin'>Admin</option><option value='viewer' >Viewer</option><option value='writer'>Writer</option></select></div>"+
 		"<div class='text-center col-md-2' ><button class='btn' id='editbtn'><i class='fa fa-pencil' aria-hidden='true'> </i> Update</button></div>" +
 		"<div class='text-center col-md-2' ><button class='btn' id='deletebtn'><i class='fa fa-times' aria-hidden='true'> </i> Delete</button></div>" +
 		"</div>" +
 		"</div>" +
 		"<br></div>";
 		
-		
+		var des= arr['u_designation'];
 			$('#country_list_id').html(htmltext);
+			$('#selectname').find("option[value="+des+"]").prop('selected', true); 
 			$( "#editbtn" ).click(function() {
-				 update_user(arr);
+				 update_user(arr);//fire mysql query and update the current values
 			});
 		}
 	});

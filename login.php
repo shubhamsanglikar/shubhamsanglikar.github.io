@@ -41,13 +41,51 @@ if(isset($submit)){
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 
 </head>
-<body>
+<body onload="check_login_status()">
+<script type="text/javascript">
+var get_params = function(search_string) {
+
+	  var parse = function(params, pairs) {
+	    var pair = pairs[0];
+	    var parts = pair.split('=');
+	    var key = decodeURIComponent(parts[0]);
+	    var value = decodeURIComponent(parts.slice(1).join('='));
+
+	    // Handle multiple parameters of the same name
+	    if (typeof params[key] === "undefined") {
+	      params[key] = value;
+	    } else {
+	      params[key] = [].concat(params[key], value);
+	    }
+
+	    return pairs.length == 1 ? params : parse(params, pairs.slice(1))
+	  }
+
+	  // Get rid of leading ?
+	  return search_string.length == 0 ? {} : parse({}, search_string.substr(1).split('&'));
+	}
+
+	
+	function check_login_status()
+	{
+		
+		var params = get_params(location.search);
+		if(params['logout']=="success")
+		{
+			document.getElementById('login_status').innerHTML="Please login to continue";
+		}
+		
+	}
+	// Finally, to get the param you want
+
+</script>
 
 <br>
 <br>
 <br>
 <br>
 <div class="container text-center">
+<div id="login_status"></div>
 <form name="form" method="post" action="">
 	  <div class="col-md-3"></div>
 		<div class="card text-center login-card col-md-6">
@@ -83,6 +121,8 @@ if(isset($submit)){
 		<div class="col-md-3"></div>
 		</form>
 </div>
+
+
 
 </body>
 
