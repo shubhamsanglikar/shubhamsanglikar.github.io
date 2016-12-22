@@ -6,9 +6,6 @@ if(empty($_SESSION['username'])){
 	header("Location:login.php?logout=success");
 }
 
-?>
-
-<?php 
 include 'header.php';
 echo "<script type='text/javascript'>
 		$('.0').addClass('current-menu-item');
@@ -93,9 +90,6 @@ $un = $_SESSION['username'];
 	</script>
 	
 </body>
-
-
-
 
    
 

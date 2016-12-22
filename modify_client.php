@@ -3,19 +3,11 @@ session_start();
 include 'header.php';
 
 echo "<script type='text/javascript'>
-		$('.5').addClass('current-menu-item');
+		$('.1').addClass('current-menu-item');
 		</script>";
 
 ?>
-<script type="text/javascript">
 
-function onload()
-{
-	//document.getElementById("debug").innerHTML=temp;
-	
-}
-
-</script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -28,13 +20,12 @@ function onload()
 
 </head>
 
-<body onload="onload()">
+<body>
     <div class="container">
        
-            <div class="input-field col-md-12"><input id="country_id" type="text" autocomplete="off" onkeyup="autocomplet('manage_users')"></input><label  for="country_id">Search User</label></div>
+            <div class="input-field col-md-12"><input id="country_id" type="text" autocomplete="off" onkeyup="autocomplet('manage_clients')"></input><label  for="country_id">Search Client</label></div>
 			<div id="country_list_id"></div>
-		
-						
+			
     </div><!-- container -->
     
 </body>

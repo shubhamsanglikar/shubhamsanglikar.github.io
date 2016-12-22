@@ -4,14 +4,14 @@ session_start();
 include 'database.php';
 
 
-echo "<script type='text/javascript'>
-		$('.3').addClass('current-menu-item');
-		</script>";
+
 extract($_POST);
 
 include 'header.php';
-		
-			
+
+echo "<script type='text/javascript'>
+		$('.3').addClass('current-menu-item');
+		</script>";		
 ?>
 
 

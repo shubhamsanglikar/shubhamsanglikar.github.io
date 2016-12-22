@@ -44,7 +44,7 @@ $isAdmin=0;
 						<a href="#">Clients</a>
 						<ul class="sub-menu">
 							<li><a href="add_clients.php"> Add </a></li>
-							<li><a href="#"> Modify</a></li>
+							<li><a href="modify_client.php"> Modify</a></li>
 							<li><a href="#"> Delete</a></li>
 							
 						</ul>
@@ -65,6 +65,7 @@ $isAdmin=0;
 					<li class="parent 4">
 						<a href="#">Account</a>
 						<ul class="sub-menu">
+						<li><a href="change_password.php">Change Password </a></li>
 							<li><a href="logout.php">Logout </a></li>
 							
 						</ul>
@@ -73,8 +74,12 @@ $isAdmin=0;
 					if($isAdmin==1)
 					{
 						echo "<li class='parent 5'>
-						<a href='manage_users.php'>Manage Users</a>
-						
+						<a href='#'>Users</a>
+						<ul class='sub-menu'>
+							<li><a href='add_users.php'> Add User</a></li>
+							<li><a href='manage_users.php'> Manage User</a></li>
+						</ul>
+					</li>
 						</li>";
 					}
 					
