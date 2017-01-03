@@ -24,7 +24,7 @@ if(isset($submit))
 	}
 	$query="insert into users(username,password,u_designation) values('$username','$password','$selectname1')";
 	$check=mysql_query($query)or die(mysql_error());
-	echo "<br><br><div>Client successfully added</div>";
+	echo "<script type='text/javascript'> alert('Client successfully added!');</script>";
 }
 
 ?>
@@ -41,7 +41,7 @@ $(document).ready(function() {
 	<div class="container">
 		<div class="inner-container ">
 			<div class="exam-header">
-				<h4 >User Information</h4>
+				<h4 >New User Information</h4>
 			</div>
 			<form name="form" method="post" action="">
 			<div class="container-fluid">
@@ -51,7 +51,7 @@ $(document).ready(function() {
 				
 <br><br>
 				
-<div class="input-field col-md-8">
+<div class="col-md-8">
     <select name="selectname1">
       
       <option value="admin">Admin</option>

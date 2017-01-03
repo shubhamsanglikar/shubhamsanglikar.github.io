@@ -20,7 +20,7 @@ if( strcmp("manage_users",$_POST['temp'])== 0)
 		$user_name = str_replace($_POST['keyword'], '<b>'.$_POST['keyword'].'</b>', $rs['username']);
 		// add new option
 		//echo '<li onclick="set_item(\''.str_replace("'", "\'", $rs['username']).'\')">'.$user_name.'</li>';
-		echo "<div class='col-md-9' style='margin:10px'>";
+		echo "<div class='col-md-12 listbox' style='margin:5px'>";
 		echo '<div onclick="set_item(\''.str_replace("'", "\'", $rs['username']).'\')">'.$user_name.'</div>';
 		echo "</div>";
 			
@@ -42,7 +42,7 @@ else
 		$user_name = str_replace($_POST['keyword'], '<b>'.$_POST['keyword'].'</b>', $rs['c_Client']);
 		// add new option
 		//echo '<li onclick="set_item(\''.str_replace("'", "\'", $rs['username']).'\')">'.$user_name.'</li>';
-		echo "<div class='col-md-9' style='margin:10px'>";
+		echo "<div class='col-md-9 listbox' style='margin:10px'>";
 		echo '<div onclick="set_item(\''.str_replace("'", "\'", $rs['c_Client']).'\')">'.$user_name.'</div>';
 		echo "</div>";
 			

@@ -22,7 +22,7 @@ $un = $_SESSION['username'];
 				<ul class="collapsible" data-collapsible="accordion">
 					<li>
 						<div class="collapsible-header">
-							<h4 >Dashboard</h4>
+							<h4 ><a href='dashboard.php'>Dashboard</a></h4>
 						</div>
 						
 					</li>

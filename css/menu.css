@@ -280,3 +280,24 @@ ul.sub-menu > li > a.parent {
 	height:500px;
 }
 
+
+.listbox:hover {
+    background-color: #d6f5f5;
+    cursor: pointer;
+}
+
+
+
+
+.container {
+  margin-top: 20px;
+}
+
+.panel-heading {
+  font-size: larger;
+}
+
+.alert {
+  display: none;
+}
+
