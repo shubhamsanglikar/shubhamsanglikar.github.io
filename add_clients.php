@@ -5,17 +5,14 @@ if(empty($_SESSION['username'])){
 	header("Location:login.php?logout=success");
 }
 
-include("header.php");
-echo "<script type='text/javascript'>
-		$('.1').addClass('current-menu-item');
-		</script>";
+
 
 error_reporting(0);
 extract($_POST);
 if(isset($submit))
 {
 	$check=mysql_query("select * from client_info where c_id='$clientid'");
-	if(mysql_fetch_array($check)>1	)
+	if(mysql_num_rows($check)>0)
 	{
 		echo "<br><br><br><div class=head1>Client Id Already Exists</div>";
 		exit;
@@ -28,7 +25,13 @@ if(isset($submit))
 }
 ?>
 <!DOCTYPE html>
-
+<?php 
+include("header.php");
+echo "<script type='text/javascript'>
+		$('.1').addClass('current-menu-item');
+		</script>";
+?>
+	
 	<br><br>
 	<div class="container">
 		<div class="inner-container ">
@@ -37,7 +40,7 @@ if(isset($submit))
 			</div>
 			<form name="form" method="post" action="">
 			<div class="container-fluid">
-				<div class="input-field col-md-4"><input id="c_id" name="clientid" type="text" ></input><label  for="c_id">Client ID</label></div>
+				
 				
 				<div class="input-field col-md-8"><input id="c_ClientType" name="clienttype" type="text" ></input><label  for="c_ClientType">Client Type</label></div>
 				
@@ -53,11 +56,11 @@ if(isset($submit))
 				
 				<div class="input-field col-md-12"><input id="c_OtherDetails" name="otherdetails" type="text" ></input><label for="c_OtherDetails">Other Details</label></div>
 				
-				<div class="input-field col-md-4">Effective Date<input id="c_EffectiveDate" name="effectivedate" type="date" ></input><label for="c_EffectiveDate"></label></div>
+				<div>Effective Date<input id="c_EffectiveDate" name="effectivedate" type="date" ></input><label for="c_EffectiveDate"></label></div>
 				
-				<div class="input-field col-md-4">Create Date<input id="c_CreateDate" name="createdate" type="date" ></input><label for="c_CreateDate"></label></div>
+				<div>Create Date<input id="c_CreateDate" name="createdate" type="date" ></input><label for="c_CreateDate"></label></div>
 				
-				<div class="input-field col-md-4">End Date<input id="c_EndDate" name="enddate" type="date" ></input><label for="c_EndDate"></label></div>
+				<div>End Date<input id="c_EndDate" name="enddate" type="date" ></input><label for="c_EndDate"></label></div>
 				
 				<div class="input-field col-md-5"><input id="c_ActiveFlag" name="activeflag" type="text" ></input><label for="c_ActiveFlag">Active Flag</label></div>
 			
@@ -71,7 +74,8 @@ if(isset($submit))
 		</div>
 	
 	</div>    
-
+	</div>
+	<br><br>
 	<div class="container">
 		<div class="inner-container">
 			<div class="exam-header">

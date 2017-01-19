@@ -24,7 +24,8 @@ echo "<script type='text/javascript'>
     <div class="container">
        
             <div class="input-field col-md-12"><input id="country_id" type="text" autocomplete="off" onkeyup="autocomplet('manage_clients')"></input><label  for="country_id">Search Client</label></div>
-			<div id="country_list_id"></div>
+			<div id="country_list_id">
+			sddg</div>
 			
     </div><!-- container -->
     

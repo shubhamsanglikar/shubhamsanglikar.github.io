@@ -26,13 +26,14 @@ function set_item(item) {
 	$('#country_id').val(item);
 	// hide proposition list
 	//$('#country_list_id').hide();
-	
+	var q =  "SELECT * FROM users WHERE username = '"+item+"' LIMIT 1";
 	$.ajax({
-		url: 'select_user.php',
+		url: 'ajax/ajax_get_single_row_from_database.php',
 		type: 'POST',
-		data: {'keyword':item},
+		data: {'query':q},
 		success:function(data){
 			//$('#country_list_id').show();
+			alert(data);
 		var arr = jQuery.parseJSON(data);
 		
 		
@@ -49,13 +50,13 @@ function set_item(item) {
 		"</div>" +
 		"<br></div>";
 		
-		var des= arr['u_designation'];
+		var des= arr[0]['u_designation'];
 			$('#country_list_id').html(htmltext);
 			$('#selectname').find("option[value="+des+"]").prop('selected', true); 
 			$( "#editbtn" ).click(function() {
 				 update_user(arr);//fire mysql query and update the current values
 			});
-			$("#nameid").val(arr['username']);
+			$("#nameid").val(arr[0]['username']);
 			$( "#deletebtn" ).click(function() {
 				 delete_user(arr);//fire mysql query and update the current values
 			});
@@ -64,15 +65,54 @@ function set_item(item) {
 	
 }
 
+function set_client(item) {
+	// change input value
+	$('#country_id').val(item);
+	// hide proposition list
+	//$('#country_list_id').hide();
+	var q =  "SELECT * FROM client_info WHERE c_Client = '"+item+"' LIMIT 1";
+	$.ajax({
+		url: 'ajax/ajax_get_single_row_from_database.php',
+		type: 'POST',
+		data: {'query':q},
+		success:function(data){
+			//$('#country_list_id').show();
+			alert(data);
+		var arr = jQuery.parseJSON(data);
+		
+		
+		var htmltext="<div class='container'><div class='col-md-12'> " +
+		"<ul class='collapsible' data-collapsible='accordion'>"+
+		"<li>"+
+			"<div class='collapsible-header'>"+
+				"<h4 >Client Info</h4>"+
+			"</div>"+
+			"<div class='collapsible-body'>"+
+				"<ul><li>ddfhh</li></ul>"+
+			"</div>"+
+			
+		"</li>"+
+		"</ul>"+
+		"<br></div></div>";
+		
+		//var des= arr['u_designation'];
+			$('#country_list_id').html(htmltext);
+			
+		}
+	});
+	
+}
+
 
 function update_user(arr){
 	
-	arr['u_desingation']=$("#selectname option:selected").text();
+	arr['u_desingation']=$("#selectname option:selected").val();
+	alert($("#selectname option:selected").val());
 	arr['username']=$("#nameid").val();
 	$.ajax({
 		url: 'update_user.php',
 		type: 'POST',
-		data: {'id': arr['user_id'], 'username': arr['username'], 'u_designation': $("#selectname option:selected").text()},
+		data: {'id': arr[0]['user_id'], 'username': arr['username'], 'u_designation': $("#selectname option:selected").val()},
 		success:function(data){
 			
 			var htmltext="<div class='card col-md-12'> " +
@@ -92,7 +132,7 @@ function update_user(arr){
 		$.ajax({
 			url: 'delete_user.php',
 			type: 'POST',
-			data: {'id': arr['user_id']},
+			data: {'id': arr[0]['user_id']},
 			success:function(data){
 				var htmltext="<div class='card col-md-12'> " +
 				"<div class='col-md-11' style='margin:10px'>" +

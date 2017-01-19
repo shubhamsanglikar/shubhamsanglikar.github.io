@@ -19,33 +19,28 @@
 function display(){
 	var str = "select Field , Zeros from prgstats where TableName = 'c_xyz_na_dist_invoice_items' limit 10";
 	$.ajax({
-		url: 'get_bar_graph.php',
+		url: 'fusionCharts/get_bar_graph.php',
 		type: 'POST',
 		data: {'q':str},
 		success:function(d){
 			var parsedData = jQuery.parseJSON(d);
-			//alert(al.data[0].label+ " "+al.data[0].value);
+			//alert(parsedData);
 
 		
 
 			var chartProperties = {
-					"caption": "Age profile of website visitors",
-			        "subcaption": "Last Year",
-			        "startingangle": "120",
-			        "showlabels": "0",
-			        "showlegend": "1",
-			        "enablemultislicing": "0",
-			        "slicingdistance": "100",
-			        "showpercentvalues": "1",
-			        "showpercentintooltip": "0",
-			        "theme": "carbon"
+					"caption": "No. of zeros",
+		            "subCaption": "prgStats",
+		            "xAxisName": "Field",
+		            "yAxisName": "Zeros",
+		            "theme": "zune"
 				      };
 		      
 			var apiChart = new FusionCharts({
-				        type: 'pie3d',
-				        renderAt: 'chart-container',
-				        width: '1000',
-				        height: '700',
+				        type: 'column2d',
+				        renderAt: 'container00',
+				        width: '600',
+				        height: '400',
 				        dataFormat: 'json',
 				        dataSource: {
 				          "chart": chartProperties,
@@ -64,7 +59,7 @@ function display(){
 FusionCharts.ready(function(){
     var revenueChart = new FusionCharts({
       "type": "column2d",
-      "renderAt": "chartContainer",
+      "renderAt": "container01",
       "width": "500",
       "height": "300",
       "dataFormat": "json",
@@ -141,9 +136,9 @@ FusionCharts.ready(function(){
 	
 </script>
 <body onload="display()">
-
-<div id="chartContainer">Loading...</div>
-<div id="chart-container" >FusionCharts XT will load here!!!</div>
-
+<div class="container-fluid">
+	<div id="container00" class="col-md-4">Loading...</div>
+	<div id="container01" class="col-md-4" >Loading...</div>
+</div>
 </body>
 </html>

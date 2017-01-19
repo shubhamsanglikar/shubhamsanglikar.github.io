@@ -11,7 +11,10 @@
 	margin-left:20px;
 	
 }
-
+.success_msg_div{
+	font-weight:bold;
+	font-size:20px;
+}
 .inner-container{
 	border: 1px solid #000;
 	padding-bottom:30px;

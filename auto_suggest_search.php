@@ -43,7 +43,7 @@ else
 		// add new option
 		//echo '<li onclick="set_item(\''.str_replace("'", "\'", $rs['username']).'\')">'.$user_name.'</li>';
 		echo "<div class='col-md-9 listbox' style='margin:10px'>";
-		echo '<div onclick="set_item(\''.str_replace("'", "\'", $rs['c_Client']).'\')">'.$user_name.'</div>';
+		echo '<div onclick="set_client(\''.str_replace("'", "\'", $rs['c_Client']).'\')">'.$user_name.'</div>';
 		echo "</div>";
 			
 			

@@ -5,17 +5,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>PRGX</title>
-	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
     <!-- Bootsrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/add-clients.css">
 		<link rel="stylesheet" href="css/materialize.min.css">
+		<link rel="stylesheet" href="css/data_table.css">
 		
 	
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/function.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/header.js"></script>
+		<script type="text/javascript" src="js/data_table.js"></script>
+		
+	
 
 </head>
 <body>
@@ -52,6 +57,9 @@ $isAdmin=0;
 					<li class="parent 2">
 						<a href="#">Build</a>
 						<ul class="sub-menu">
+							<li><a href="client_build_info.php"> Manage Build </a></li>
+							<li><a href="client_build_jobsequence_template.php"> Build JobSequence</a></li>
+							<li><a href="client_build_parameters_template.php"> Build Parameters</a></li>
 							
 						</ul>
 					</li>
