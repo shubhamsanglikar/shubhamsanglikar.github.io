@@ -5,6 +5,7 @@ include("database.php");
 extract($_POST);
 
 if(isset($submit)){
+	
 	$rs=mysql_query("select * from users where username='$username' and password='$password'");
 	if(mysql_num_rows($rs)==1)
 	{
@@ -13,7 +14,7 @@ if(isset($submit)){
 		 
 		 $_SESSION['designation']=$t[0];
 		 $_SESSION['username']=$username;
-		header("Location:home.php");
+		header("Location:dashboard.php");
 		exit;
 	}
 	else {

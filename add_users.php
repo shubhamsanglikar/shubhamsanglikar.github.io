@@ -1,15 +1,6 @@
 <?php 
-
-session_start();
-include("database.php");
-if(empty($_SESSION['username'])){
-	header("Location:login.php?logout=success");
-}
-
 include("header.php");
-echo "<script type='text/javascript'>
-		$('.5').addClass('current-menu-item');
-		</script>";
+set_header_focus(4);
 
 error_reporting(0);
 extract($_POST);

@@ -1,11 +1,6 @@
 <?php
-session_start();
-include 'header.php';
-
-echo "<script type='text/javascript'>
-		$('.5').addClass('current-menu-item');
-		</script>";
-
+include("header.php");
+set_header_focus(4);
 ?>
 <script type="text/javascript">
 

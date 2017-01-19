@@ -1,4 +1,14 @@
 <?php 
+/*
+ * 
+ *						 $q="select distinct c_id, c_Client from client_info";
+						$c=mysql_query($q);
+						$row=mysql_fetch_array($c);
+						$row['clt_no'];//
+ */
+
+
+
 session_start();
 include("database.php");
 if(empty($_SESSION['username'])){

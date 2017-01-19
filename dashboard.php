@@ -1,20 +1,8 @@
 <?php
-//query for loading files ...
-//select cft.cft_id, cft.cft_Delimiter, cid.ind_FileName from client_files_template as cft inner join client_inventory_details as cid on cid.cft_id = cft.cft_id 
-
-session_start();
-
-include("database.php");
-if(empty($_SESSION['username'])){
-	header("Location:login.php?logout=success");
-}
-
-include 'header.php';
-echo "<script type='text/javascript'>
-		$('.0').addClass('current-menu-item');
-		</script>";
-$un = $_SESSION['username'];
+include("header.php");
+set_header_focus(0);
 ?>	
+
 <!DOCTYPE html>
 <head>
 
@@ -24,10 +12,43 @@ $un = $_SESSION['username'];
 <body >
 <script type="text/javascript">
 
+function display_clients(letters,letterl)
+{
+	$(".alphabet_list").removeClass("active");
+	$('.'+letters).addClass("active");
+	(letters);
+	 $.ajax({
+				url: 'ajax/ajax_get_arraylist_from_database.php',
+				type: 'POST',
+				data: {'query': "SELECT c_Client from client_info",'val':'c_Client'},
+				success:function(data){
+					
+					var arr = jQuery.parseJSON(data);
+					var al = arr.length;
+					var i=0;
+					//if(arr[1].substring(0,1)==letters){alert("yes")};
+					$("#client_display_div").html("<ul id='client_ul' class='hide-on-med-and-down'></ul>");
+				
+					for(i = 0 ;i < arr.length ; i++){	
+						
+						if(arr[i].substring(0,1) == letters || arr[i].substring(0,1) == letterl )
+						{
+							
+							$("#client_ul").append("<li><a href='dashboard_build.php?client_name="+arr[i]+"'>"+arr[i]+"</a></li>");  
+							$('#client_div').css('visibility','visible');
+						}
+					}
+					
+					
+				}
+			});
+		
+}
 
- 
-
+	
 </script>
+
+	
 	<div class="container-fluid">
 	
 		<div class="col-md-3 side-menu"><!-- ***************side-menu***************** -->
@@ -40,214 +61,234 @@ $un = $_SESSION['username'];
 						
 					</li>
 					
-					<li>
-						<div class="collapsible-header">
-							<h4>Saved Reports</h4>
-						</div>
-						<?php 
-						$q="select report_name from reports where generated_by = '$un' ";
-						$c=mysql_query($q);
-							echo "<div class='collapsible-body'>
-							<ul>";
-						while($row=mysql_fetch_array($c))
-						{
-							//echo $row['report_name'];
-							
-							echo "<li><a href='#' onclick='change_report(this)'>".$row['report_name']."</a></li>";
-									
-								
-						}
-						echo "</ul>
-							</div>
-							";
-						?>
-						
-					</li>
+					
 					
 				</ul>
 			
 		</div>	
-		<div class="col-md-9 text-left">
-			<div class="container-fluid ">
-				
+		
+		<div class="col-md-9">
+		  
+		  
+			<nav >
+    
 			
-				<div class=" col-md-6 ">
-					<label  for="client_select">Client</label>
-					<?php 
-						$q="select distinct c_id, c_Client from client_info";
-						$c=mysql_query($q);
-			
-						echo "<select id='client_select' class='browser-default' onchange='show_build_info()'>";
-						while($row=mysql_fetch_array($c))
-						{
-				
-							echo "<option onclick='show_build_info();' value=".$row['c_id']." >".$row['c_Client']."</option>";
-
-						}
-						echo "</select>";
-					?>
-				</div>
-				<div id='build_select_div' class = "col-md-6">
+				<div class="nav-wrapper green darken-2">
 					
+						<a href="#" class="brand-logo right"></a>
+						<ul id="nav-mobile" class="left hide-on-med-and-down">
+						<li class="alphabet_list a"><a onclick="display_clients('a','A');" >A</a></li>
+						<li class="alphabet_list b"><a onclick="display_clients('b','B')">B</a></li>
+						<li><a onclick="display_clients('c','C')">C</a></li>
+						<li><a onclick="display_clients('d','D')">D</a></li>
+						<li><a onclick="display_clients('e','E')">E</a></li>
+						<li><a onclick="display_clients('f','F')">F</a></li>
+						<li><a onclick="display_clients('g','G')">G</a></li>
+						<li><a onclick="display_clients('h','H')">H</a></li>
+						<li><a onclick="display_clients('i','I')">I</a></li>
+						<li><a onclick="display_clients('j','J')">J</a></li>
+						<li><a onclick="display_clients('k','K')">K</a></li>
+						<li><a onclick="display_clients('l','L')">L</a></li>
+						<li><a onclick="display_clients('m','M')">M</a></li>
+						<li><a onclick="display_clients('n','N')">N</a></li>
+						<li><a onclick="display_clients('o','O')">O</a></li>
+						<li><a onclick="display_clients('p','P')">P</a></li>
+						<li><a onclick="display_clients('q','Q')">Q</a></li>
+						<li><a onclick="display_clients('r','R')">R</a></li>
+						<li><a onclick="display_clients('s','S')">S</a></li>
+						<li><a onclick="display_clients('t','T')">T</a></li>
+						<li><a onclick="display_clients('u','U')">U</a></li>
+						<li><a onclick="display_clients('v','V')">V</a></li>
+						<li><a onclick="display_clients('w','W')">W</a></li>
+						<li><a onclick="display_clients('x','X')">X</a></li>
+						<li><a onclick="display_clients('y','Y')">Y</a></li>
+						<li><a onclick="display_clients('z','Z')">Z</a></li>
+						</ul>
 				</div>
-				<div id='button_div' class = "col-md-12 hidden text-left">
-					<button class="btn btn-primary" onclick="display_info()">Get Latest Build Info</button>
-				    <button class="btn btn-primary" onclick="display_files()">Get Files Info</button>
-				</div>
-				
-				<div id='display_div' class = "col-md-12">
-				</div>
-				
-			</div>	
+			</nav>
+			
+			
 		</div>
 		
 		
-	</div>
+		
+		
+		<div class="col-md-5" id="client_div" style = "visibility: hidden">
+		<div class="panel panel-default card">
+		<div class="panel-heading" >
+			
+		<h3 >Clients</h3>
+		</div>
+		<div class="panel-body" >
+		
+		<div id = "client_display_div" ></div>
+		</div>
+		
+		
+		</div>
+		</div>
+		
+		
+	
+		
+		
+	
+		
+	
+		<div class="col-md-4 ">
+		</div>
+		<div class="col-md-4 ">
+		</div>
+	
+	
+		<div class="col-md-2 ">
+			
+					<div class="card1">
+					<div class="col s12 m6">
+					<div class="card brown">
+					<div class="card-content white-text">
+					<span class="card-title">Total Scripts</span>
+      
+					</div>
+				
+					<div class="card-action">
+						<a href="#">
+						<?php 
+							$a = mysql_query("SELECT COUNT(distinct cbj_script_name) FROM client_build_jobsequence");
+							$row=mysql_fetch_array($a);
+							echo $row['0'];
+						?>
+						</a>
+						
+					</div>
+					</div>
+					</div>
+					</div>
+				
+		</div>
+			
+			
+			
+	    <div class="col-md-2 ">
+			
+					<div class="card1">
+					<div class="col s12 m6">
+					<div class="card blue ">
+					<div class="card-content white-text">
+					<span class="card-title">Total Builds</span>
+      
+					</div>
+				
+					<div class="card-action">
+						<a href="#">
+						<?php 
+							$a = mysql_query("SELECT COUNT(*) FROM client_build_info");
+							$row=mysql_fetch_array($a);
+							echo $row['0'];
+						?>
+						</a>
+						
+					</div>
+					</div>
+					</div>
+					</div>
+            
+			
+			
+			
+		</div>
+			
+			
+			
+			
+			
+	
+	
 	
 	 
+	 
+	 
 	
-	<script src="assets/js/bootstrap.min.js"></script>
 	
-	<script type="text/javascript">
-	var names;
-	var values;
-
-
-	function display_files(){
-		$.ajax({
-			url: 'ajax/ajax_get_single_row_from_database.php',
-			type: 'POST',
-			data: {'query': "select cft.cft_id, cft.cft_Delimiter, cid.ind_FileName from client_files_template as cft inner join client_inventory_details as cid on cid.cft_id = cft.cft_id and cid.cfi_id = ( select cfi_id from client_build_file_xref where cbi_id = "+ $('#build_select').find('option:selected').attr("value") + " )"},
-			success:function(data){
-				
-				var arr = jQuery.parseJSON(data);
-				
-				htmlstr="<table id='table' class='display dataTable' width='100%' cellspacing='10'>"+
-				"<thead><tr><th>cft_id</th><th>cft_Delimeter</th><th>ind_FileName</th></tr></thead>"+
-				"<tfoot><tr><th>cft_id</th><th>cft_Delimeter</th><th>ind_FileName</th></tr></tfoot><tbody>";
-  
+		<div class="col-md-4 ">
+		</div>
+	
+		<div class="col-md-4 ">
+		</div>
+	
+	
+		<div class="col-md-2 ">
+			
+					<div class="card1">
+					<div class="col s12 m6">
+					<div class="card red ">
+					<div class="card-content white-text">
+					<span class="card-title">Total Clients</span>
       
+					</div>
 				
-				//alert("names:"+names[1].COLUMN_NAME+"\nvalues"+values[0][0]);
+					<div class="card-action white-text">
+						<a href="#">
+						<?php 
+							$a = mysql_query("SELECT COUNT(*) FROM client_info");
+							$row=mysql_fetch_array($a);
+							echo $row['0'];
+						?>
+						</a>
+						
+					</div>
+					</div>
+					</div>
+					</div>
+			
+			
+			
+			
+		</div>
+			
+			
+			<div class="col-md-2 ">
+			
+					<div class="card1">
+					<div class="col s12 m6">
+					<div class="card orange ">
+					<div class="card-content white-text">
+					<span class="card-title">Total Files</span>
+      
+					</div>
 				
-				
-				//htmlstr = htmlstr+"<tr><td>11</td><td>22</td><td>33</td></tr>";
-				//htmlstr = htmlstr+"<tr><td>12</td><td>223</td><td>343</td></tr>";
-				htmlstr = htmlstr+"</tbody></table>";
-				$("#display_div").html(htmlstr);
-				arr.forEach(files_function);
-				//alert(values);
-				$('#table').DataTable({                           
-				       "bJQueryUI": true,
-				       "sPaginationType": "full_numbers",
-				       "bSort": true,
-				       "bFilter": true,
-				    });
-				$('div.dataTables_filter input').addClass('browser-default');
-				$(".dataTables_length select").addClass("browser-default");
-				
-				
-			}
-		});
+					<div class="card-action white-text">
+						<a href="#">
+						<?php 
+							$a = mysql_query("SELECT COUNT(*) FROM client_inventory_details");
+							$row=mysql_fetch_array($a);
+							echo $row['0'];
+						?>
+						</a>
+						
+					</div>
+					</div>
+					</div>
+					</div>
+            
+			
+			
+			
+			</div>
+			
+			
+			
+			
+			
 	
-	}
-
-	function files_function(item)
-	{
-		if(item['cft_Delimeter']== null){item['cft_Delimeter']="null";}
-	  	//htmlstr = htmlstr+"<tr><td> "+item['cft_id']+ " </td><td>"+item['cft_Delimeter']+"<td><td>"+item['ind_FileName']+"<td></tr>";
-		$('#table').append("<tr><td>"+item['cft_id']+ "</td><td>"+item['cft_Delimeter']+"</td><td>"+item['ind_FileName']+"</td></tr>");
-	}
-		function show_build_info(){
-			//alert($('#client_select').find('option:selected').attr("value"));
-			$.ajax({
-				url: 'ajax/ajax_get_single_row_from_database.php',
-				type: 'POST',
-				data: {'query': "SELECT cbi_id , cbi_build_name from client_build_info where c_id = "+ $('#client_select').find('option:selected').attr("value"),'val': "cbi_build_name"},
-				success:function(data){
-					//alert(data);
-					//var arr = jQuery.parseJSON(data);
-					//alert(arr[0].cbi_id);
-
-					var st="<label id='label_display_div' for ='build_select_div'>Build Name</label><select class='browser-default' id='build_select'></select>";
-					//$("#label_build_select_div").css('visibility', 'visible');
-					$('#build_select_div').html(st);
-					var arr = jQuery.parseJSON(data);
-					var al = arr.length;
-					var i=0;
-					//$('#build_select_div').append("<label id="label_build_select_div" style="visibility: visible;">Build Name</label>");
-					
-					for(i = 0 ;i < al ; i++){	
-						//alert(arr[i].cbi_id);
-						$('#build_select').append("<option value='"+arr[i].cbi_id+"' >"+arr[i].cbi_build_name+"</option>");
-					}
-					$("#button_div").removeClass("hidden").addClass("visible");
-					
-					
-				}
-			});
-			}
-
-		function display_info1(){
-			//alert($('#build_select').find('option:selected').attr("value"));
-			
-			$.ajax({
-				url: 'ajax/ajax_get_single_row_from_database.php',
-				type: 'POST',
-				data: {'query': "SELECT * from client_build_info_detail where cbi_id = "+ $('#build_select').find('option:selected').attr("value") +" ORDER by cbj_RunId DESC limit 1"},
-				success:function(data){
-					
-					var arr = jQuery.parseJSON(data);
-					values=arr;
-					//alert("names:"+names[1].COLUMN_NAME+"\nvalues"+values[0][0]);
-					
-					htmlstr = htmlstr+"</tbody></table>";
-					
-					$("#display_div").html(htmlstr);
-					names.forEach(func);
-					$('#build_info_table').DataTable({                           
-					       "bJQueryUI": true,
-					       "sPaginationType": "full_numbers",
-					       "bpaging": false,
-					       "bSort": true,
-					       "bFilter": true,
-					    });
-					$(".dataTables_length select").addClass("browser-default");
-				}
-			});
-		}
-
-		var i=0;
-		var htmlstr ="<table style='width:100%'><th>Field</th><th> Values</th>";
-		function func(item)
-		{
 	
-		  	//htmlstr = htmlstr+"<tr><td> "+item[0]+ " </td><td>"+values[0][i++]+"</td></tr>";
-		  	$('#build_info_table').append("<tr><td> "+item[0]+ " </td><td>"+values[0][i++]+"</td></tr>");
-			//alert(item[0]+ "   "+values[0][i++]);
-		}
-		function display_info(){
-			//alert($('#client_select').find('option:selected').attr("value"));
-					i=0;
-			htmlstr ="<table id='build_info_table' class='display browser-default' style='width:100%'><thead><tr><th>Field</th><th> Values</th></tr></thead><tbody>";
-			$.ajax({
-				url: 'ajax/ajax_get_single_row_from_database.php',
-				type: 'POST',
-				data: {'query': "select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = 'client_build_info_detail' "},
-				success:function(data1){
-					//alert(data1);
-					
-					var temp12 = jQuery.parseJSON(data1);
-					names = temp12;
-					//alert("got names");	
-					display_info1();
-					
-				}
-			});
-			
-			
-			}
-	</script>
+	
+	
+	
+	</div>	
+	 
+	
+
 	
 </body>
 
