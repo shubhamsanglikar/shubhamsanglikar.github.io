@@ -19,7 +19,7 @@ if(isset($submit))
 			$query="update users set password = '$np' where username = '$username'";
 			$check=mysql_query($query)or die(mysql_error());
 			echo "<script type='text/javascript'> alert('Password changed successfully!');</script>";
-			header("Location:home.php");
+			header("Location:dashboard.php");
 		}
 		else 
 		{

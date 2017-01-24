@@ -1,9 +1,9 @@
 <?php 
-session_start();
-include("database.php");
+include("header.php");
+set_header_focus(2);
 extract($_POST);
 $build_name=$_SESSION['cbi_build_name'];
-include("header.php");
+
 ?>
 	<html>
 	<script type="text/javascript">

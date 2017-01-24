@@ -1,17 +1,9 @@
 <?php
-session_start();
-
-include 'database.php';
-
-
-
+include("header.php");
+set_header_focus(3);
 extract($_POST);
 
-include 'header.php';
 
-echo "<script type='text/javascript'>
-		$('.3').addClass('current-menu-item');
-		</script>";		
 ?>
 
 

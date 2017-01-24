@@ -4,7 +4,8 @@
 	set_header_focus(0);
 ?>
 <!DOCTYPE html>
-
+<link href = "css/jquery-ui.min.css" rel = "stylesheet">
+<script src = "js/jquery-ui.min.js"></script>
 <body onload="set_client_select()">
 
 	<div class="container-fluid">
@@ -71,7 +72,7 @@
 	
 	 
 	
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	
 	<script type="text/javascript">
 

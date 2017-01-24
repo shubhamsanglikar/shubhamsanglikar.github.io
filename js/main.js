@@ -31,6 +31,12 @@ var dashboard_build_variable_values;
 				       "sPaginationType": "full_numbers",
 				       "bSort": true,
 				       "bFilter": true,
+				       "responsive": true,
+				       "buttons": [
+				                 'colvis',
+				                 'excel',
+				                 'print'
+				             ]
 				    });
 				$('div.dataTables_filter input').addClass('browser-default');
 				$(".dataTables_length select").addClass("browser-default");

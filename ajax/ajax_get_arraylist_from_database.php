@@ -7,7 +7,7 @@
  * output: json encoded array 
  * implementation:
  *  $.ajax({
-				url: 'ajax_get_arraylist_from_database.php',
+				url: 'ajax/ajax_get_arraylist_from_database.php',
 				type: 'POST',
 				data: {'query': "SELECT cbi_build_name from client_build_info", 'val':'cbi_build_name'},
 				success:function(data){
@@ -26,10 +26,7 @@
  * 
  * 
  */
-
-function connect() {
-    return new PDO('mysql:host=localhost;dbname=prgx', 'root', 'shubhamrns', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-}
+include '../database_pdo.php';
 $pdo = connect();
 
 $query = $_POST['query'];

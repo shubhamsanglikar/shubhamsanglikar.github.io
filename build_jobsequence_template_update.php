@@ -1,8 +1,6 @@
 <?php
 // PDO connect *********
-function connect() {
-    return new PDO('mysql:host=localhost;dbname=prgx', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-}
+include 'database_pdo.php';
 session_start();
 $pdo = connect();
 $field = $_POST['field'];
