@@ -300,8 +300,11 @@ function check_status(){
 	var wordcnt = 0;
 	var keyword = $('#input_text').val();
 	for(var i = 0 ; i< keyword.length ; i++ ){
-		if(keyword[i]==' '){
+		if(keyword[i]==' ' || ((keyword[i] == '<' || keyword[i] == '=' || keyword[i] == '>') && wordcnt%4 == 0)){
 			wordcnt++;
+		}
+		while(keyword[i]==' '){
+			i++;
 		}
 	}
 	wordcnt = wordcnt%4;
