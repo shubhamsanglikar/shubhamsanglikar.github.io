@@ -61,11 +61,11 @@ extract($_POST);
 						$q="select distinct c_id, c_Client from client_info";
 						$c=mysql_query($q);
 			
-						echo "<select id='client_select' name='client_select' class='browser-default'>";
+						echo "<select id='client_select' name='client_select' onchange='addBuildName(this,\"build_name_select\")' class='browser-default'>";
 						while($row=mysql_fetch_array($c))
 						{
 				
-							echo "<option onclick='addBuildName(this,\"build_name_select\")' value=".$row['c_id']." >".$row['c_Client']."</option>";
+							echo "<option value=".$row['c_id']." >".$row['c_Client']."</option>";
 
 						}
 						echo "</select>";
@@ -80,8 +80,8 @@ extract($_POST);
 			             	<div class="col-md-6">
 					 		<label for="build_name_select">Build_ID-Build_name:</label>
 					
-						<select id='build_name_select' name='build_name_select' class='browser-default'>
-						<option value="Not Selected">Select Build Name</option>
+						<select id='build_name_select' name='build_name_select' onchange='addParameterName(this)' class='browser-default'>
+						
 						</select>
 					
               		</div>
@@ -123,7 +123,7 @@ extract($_POST);
 <script type="text/javascript">
 $(document).ready(function() {
     $('select').material_select();
-  });
+});
 
 
 function addBuildName(d,field){
@@ -142,7 +142,7 @@ function addBuildName(d,field){
 			//alert(al);
 			var i=0;
 			for(i = 0 ;i<al ; i++){
-					$('#build_name_select').append("<option onclick='addParameterName(this,\"parameter_name_select\")' value='"+arr[i]['cbi_id']+"'>"+arr[i]['cbi_build_name']+"</option>");
+					$('#build_name_select').append("<option value='"+arr[i]['cbi_id']+"'>"+arr[i]['cbi_build_name']+"</option>");
 				
 			}
 		}
@@ -151,14 +151,15 @@ function addBuildName(d,field){
 }
 
 
-function addParameterName(d,field){
+function addParameterName(d){
 	//alert(d.value);
+	var field = "parameter_name_select";
 	var id=d.value;
 	$('#parameter_name_select').html("");
 	$.ajax({
 		url: 'build_parameter_template_update.php',
 		type: 'POST',
-		data: {'field':field, 'value':d.value},
+		data: {'field':field, 'value':id},
 		success:function(data){
 			//alert(data);
 		var arr = jQuery.parseJSON(data);

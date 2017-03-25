@@ -286,6 +286,10 @@ ul.sub-menu > li > a.parent {
     cursor: pointer;
 }
 
+.listbox-selected{
+    background-color: #d6f5f5;
+}
+
 
 
 
@@ -300,4 +304,5 @@ ul.sub-menu > li > a.parent {
 .alert {
   display: none;
 }
+
 

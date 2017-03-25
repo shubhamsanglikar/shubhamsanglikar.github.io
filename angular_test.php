@@ -29,22 +29,41 @@ function display(){
 		
 
 			var chartProperties = {
-					"caption": "No. of zeros",
-		            "subCaption": "prgStats",
-		            "xAxisName": "Field",
-		            "yAxisName": "Zeros",
-		            "theme": "zune"
+					"caption": "Unique Website Visitors",
+		            "subcaption": "Last year",
+		            "yaxisname": "Unique Visitors",
+		            "xaxisname": "Date",
+		            "yaxisminValue": "800",
+		            "yaxismaxValue": "1400",
+		            "pixelsPerPoint": "0",
+		            "pixelsPerLabel": "30",
+		            "lineThickness": "1",
+		            "compactdatamode": "1",
+		            "dataseparator": "|",
+		            "labelHeight": "30",
+		            "theme": "fint"
 				      };
 		      
 			var apiChart = new FusionCharts({
-				        type: 'column2d',
+				        type: 'zoomline',
 				        renderAt: 'container00',
 				        width: '600',
 				        height: '400',
 				        dataFormat: 'json',
 				        dataSource: {
 				          "chart": chartProperties,
-				          "data": parsedData
+	
+				          "categories": [{
+					            "category": "Jan 01|Jan 02|Jan 03|Jan 04"
+						      }],
+					        "dataset": [{
+					            "seriesname": "myData",
+					            "data": "3178|3230|3315|3442"
+					        },
+					        {
+					            "seriesname": "regression line",
+					            "data": "2000|3000|4000|5000"
+					        }]
 				        }
 				      });
 		      
@@ -57,74 +76,42 @@ function display(){
 
 
 FusionCharts.ready(function(){
-    var revenueChart = new FusionCharts({
-      "type": "column2d",
-      "renderAt": "container01",
-      "width": "500",
-      "height": "300",
-      "dataFormat": "json",
-      "dataSource": {
-        "chart": {
-            "caption": "Monthly revenue for last year",
-            "subCaption": "Harry's SuperMart",
-            "xAxisName": "Month",
-            "yAxisName": "Revenues (In USD)",
-            "theme": "fint"
-         },
-        "data": [
-            {
-               "label": "Jan",
-               "value": "420000"
-            },
-            {
-               "label": "Feb",
-               "value": "810000"
-            },
-            {
-               "label": "Mar",
-               "value": "720000"
-            },
-            {
-               "label": "Apr",
-               "value": "550000"
-            },
-            {
-               "label": "May",
-               "value": "910000"
-            },
-            {
-               "label": "Jun",
-               "value": "510000"
-            },
-            {
-               "label": "Jul",
-               "value": "680000"
-            },
-            {
-               "label": "Aug",
-               "value": "620000"
-            },
-            {
-               "label": "Sep",
-               "value": "610000"
-            },
-            {
-               "label": "Oct",
-               "value": "490000"
-            },
-            {
-               "label": "Nov",
-               "value": "900000"
-            },
-            {
-               "label": "Dec",
-               "value": "730000"
-            }
-         ]
-      }
-  });
-
-  revenueChart.render();
+	var fusioncharts = new FusionCharts({
+	    type: 'zoomline',
+	    renderAt: 'container01',
+	    width: '600',
+	    height: '400',
+	    dataFormat: 'json',
+	    dataSource: {
+	        "chart": {
+	        	"caption": "Unique Website Visitors",
+	            "subcaption": "Last year",
+	            "yaxisname": "Unique Visitors",
+	            "xaxisname": "Date",
+	            "yaxisminValue": "800",
+	            "yaxismaxValue": "1400",
+	            "pixelsPerPoint": "0",
+	            "pixelsPerLabel": "30",
+	            "lineThickness": "1",
+	            "compactdatamode": "1",
+	            "dataseparator": "|",
+	            "labelHeight": "30",
+	            "theme": "fint"
+	        },
+	        "categories": [{
+	            "category": "Jan 01|Jan 02|Jan 03|Jan 04"
+		      }],
+	        "dataset": [{
+	            "seriesname": "myData",
+	            "data": "3178|3230|3315|3442"
+	        },
+	        {
+	            "seriesname": "regression line",
+	            "data": "2000|3000|4000|5000"
+	        }]
+	    }
+	});
+	fusioncharts.render();
 })
 
 

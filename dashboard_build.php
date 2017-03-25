@@ -37,14 +37,17 @@
 			<div class=" col-md-6 ">
 					<label  for="client_select">Client</label>
 					<?php 
-						$q="select distinct c_id, c_Client from client_info";
+						$q="select distinct c_id, c_Client from Client_Info order by c_Client";
 						$c=mysql_query($q);
-			
-						echo "<select id='client_select' class='browser-default' onchange='show_build_info()'>";
+						
+						$temp = $_SESSION['client_name'];
+						
+						echo $temp." sdf";
+						echo "<select id='client_select' class='browser-default' onchange='show_build_info()' value='$temp'>";
 						while($row=mysql_fetch_array($c))
 						{
 				
-							echo "<option onclick='show_build_info();' value=".$row['c_id']." >".$row['c_Client']."</option>";
+							echo "<option value=".$row['c_id']." >".$row['c_Client']."</option>";
 
 						}
 						echo "</select><br>";

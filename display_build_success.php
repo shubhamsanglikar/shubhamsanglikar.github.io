@@ -11,7 +11,7 @@ $build_name=$_SESSION['cbi_build_name'];
 	</script>
 	<body>
 	<?php 
-	$q="select * from client_build_info inner join client_info on client_info.c_id = client_build_info.c_id where client_build_info.cbi_build_name = '$build_name';";
+	$q="select * from Client_Build_Info inner join Client_Info on Client_Info.c_id = Client_Build_Info.c_id where Client_Build_Info.cbi_build_name = '$build_name';";
 	$c=mysql_query($q);
 	$row=mysql_fetch_array($c);
 	

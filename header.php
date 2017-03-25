@@ -15,16 +15,33 @@
 		<link rel="stylesheet" href="css/materialize.min.css">
 		<link rel="stylesheet" href="css/data_table.css">
 		
-	
+	<link href = "css/jquery-ui.min.css" rel = "stylesheet">
+	<script src = "js/jquery-ui.min.js"></script>
+
+
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/function.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/header.js"></script>
 	<script type="text/javascript" src="js/data_table.js"></script>
-		
+	<!--  <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 		
 		
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type = "text/javascript">
+	function set_session_variable(name,value){
+		alert("name"+name+" "+value);
+		$.ajax({
+			url: 'ajax/ajax_set_session_varibles.php',
+			type: 'POST',
+			data: {'name':name,'value':value},
+			success:function(data){
+				alert(data);
+			}
+		});
+		alert(<?php echo "ahaha".$_SESSION['client_name']?>)
+	}
+	</script>
 
 </head>
 <body>
@@ -34,6 +51,7 @@
 		<div class="s-inner s-relative">
 			<a class="logo" href="#"><img src="images/prgxlogo.jpg" alt="PRGX" width="260px" height="40px"></a>
 			<a id="s-menu-toggle" class="button dark" href="#"><i class="icon-reorder"></i></a>
+			
 			<div id="s-navigation">
 				<ul id="s-main-menu">
 					<li class="parent 0"><a href="dashboard.php">Home</a></li>
@@ -41,7 +59,7 @@
 						<a href="#">Clients</a>
 						<ul class="sub-menu">
 							<li><a href="add_clients.php"> Add </a></li>
-							<li><a href="modify_client.php"> Modify</a></li>
+							<li><a href="client_info_update.php"> Modify</a></li>
 							<li><a href="#"> Delete</a></li>
 							
 						</ul>
@@ -60,6 +78,7 @@
 						<ul class="sub-menu">
 							<li><a href="report_test.php"> Create Reports </a></li>
 							<li><a href="#"> View Reports</a></li>
+							<li><a href="report_compare.php"> Compare </a></li>
 						</ul>
 					</li>
 					<?php 

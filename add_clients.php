@@ -1,137 +1,147 @@
 <?php 
-/*
- * 
- *						 $q="select distinct c_id, c_Client from client_info";
-						$c=mysql_query($q);
-						$row=mysql_fetch_array($c);
-						$row['clt_no'];//
- */
-
-
-
-session_start();
-include("database.php");
-if(empty($_SESSION['username'])){
-	header("Location:login.php?logout=success");
-}
-
-
-
-error_reporting(0);
+include("header.php");
+set_header_focus(1);
 extract($_POST);
+error_reporting(0);
+
 if(isset($submit))
 {
-	$check=mysql_query("select * from client_info where c_id='$clientid'");
-	if(mysql_num_rows($check)>0)
-	{
-		echo "<br><br><br><div class=head1>Client Id Already Exists</div>";
-		exit;
-	}
-	echo "insertingg into database...";
-	$query="insert into client_info(c_id,c_Client,c_ClientType,c_Description,c_ShortName,c_Country,c_Location,c_OtherDetails,c_EffectiveDate,c_EndDate,c_CreateDate,c_ActiveFlag) values('$clientid','$client','$clienttype','$description','$shortname','$country','$location','$otherdetails','$effectivedate','$enddate','$createdate','$activeflag')"; 
-	$check=mysql_query($query)or die(mysql_error());
-	echo "<br><br><br><div> Client succesfully added</div>";
-	echo "$effectivedate";
+	
+$_SESSION['c_Client']=$c_Client;
+$_SESSION['c_ClientType']= $c_ClientType ;
+$_SESSION['c_Description']= $c_Description ;
+$_SESSION['c_ShortName']= $c_ShortName ;
+$_SESSION['c_Country']= $c_Country ;
+$_SESSION['c_Location']= $c_Location ;
+$_SESSION['c_OtherDetails']= $c_OtherDetails ;
+$_SESSION['c_EffectiveDate']= $c_EffectiveDate ;
+$_SESSION['c_EndDate']= $c_EndDate ;
+$_SESSION['c_CreateDate']= $c_CreateDate ;
+$_SESSION['c_CreateDate']= $c_CreateDate ;
+
+$_SESSION['add_clients_flag']=0;
+
+
+header("Location:client_load_template.php");
 }
+
 ?>
 <!DOCTYPE html>
-<?php 
-include("header.php");
-echo "<script type='text/javascript'>
-		$('.1').addClass('current-menu-item');
-		</script>";
-?>
-	
-	<br><br>
-	<div class="container">
-		<div class="inner-container ">
-			<div class="exam-header">
-				<h4 >Client Information</h4>
-			</div>
-			<form name="form" method="post" action="">
-			<div class="container-fluid">
-				
-				
-				<div class="input-field col-md-8"><input id="c_ClientType" name="clienttype" type="text" ></input><label  for="c_ClientType">Client Type</label></div>
-				
-				<div class="input-field col-md-12"><input id="c_Client" name="client" type="text" ></input><label  for="c_Client">Client</label></div>
-				
-				<div class="input-field col-md-12"><input id="c_Description" name="description" type="text"></input><label  for="c_Description">Description</label></div>
-				
-				<div class="input-field col-md-4"><input id="c_ShortName" name="shortname"type="text"></input><label for="c_ShortName">Short Name</label></div>
-				
-				<div class="input-field col-md-4"><input id="c_Country" name="country" type="text" ></input><label  for="c_Country">Country</label></div>
-				
-				<div class="input-field col-md-4"><input id="c_Location" name="location" type="text" ></input><label for="c_Location">Location</label></div>
-				
-				<div class="input-field col-md-12"><input id="c_OtherDetails" name="otherdetails" type="text" ></input><label for="c_OtherDetails">Other Details</label></div>
-				
-				<div>Effective Date<input id="c_EffectiveDate" name="effectivedate" type="date" ></input><label for="c_EffectiveDate"></label></div>
-				
-				<div>Create Date<input id="c_CreateDate" name="createdate" type="date" ></input><label for="c_CreateDate"></label></div>
-				
-				<div>End Date<input id="c_EndDate" name="enddate" type="date" ></input><label for="c_EndDate"></label></div>
-				
-				<div class="input-field col-md-5"><input id="c_ActiveFlag" name="activeflag" type="text" ></input><label for="c_ActiveFlag">Active Flag</label></div>
-			
-			</div>
-			
-			<br>
-							<input type="submit" value="Add" name="submit" class="waves-effect waves-light btn"></input>
-			
-		</form>
-	
-		</div>
-	
-	</div>    
-	</div>
-	<br><br>
-	<div class="container">
-		<div class="inner-container">
-			<div class="exam-header">
-				<h4 >Client Load</h4>
-			</div>
-			<form name="form" method="post" action="">
-			<div class="container-fluid">
-			
-			<?php 
-			$q="select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='client_load_template'";
-			$c=mysql_query($q);
-			
-			while($row=mysql_fetch_array($c))
-			{
-				//echo $row['COLUMN_NAME'];
-			
-			
-				
-				echo "<div class='input-field col-md-4'><input type='text' id='".$row['COLUMN_NAME']."1'";
-				if($row['COLUMN_NAME']=="clt_id"){echo "value = 'test'";}
-				echo " name=".$row['COLUMN_NAME']."></input><label for=".$row['COLUMN_NAME']."1".">".$row['COLUMN_NAME']."</label></div>";
-			}	
-			?>	
-			</div>
-			
-			<br>
-							<input type="submit" value="Add" name="submit"class="waves-effect waves-light btn"></input>
-			
-		</form>
+
+<body>
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+	<h3 >Client Info</h3>
+      <a href="http://1000hz.github.io/bootstrap-validator/" target="_blank"></a>
+    </div>
+    <div class="panel-body">
+    <!--  <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         action='client_load_template.php'
+      </div>							-->
+      <form role="form" id="form" name="form" method="post"   >
+	  <div class="container-fluid">
+	  
+     <!--   <div class="form-group input-field col-md-4">
+              <label for="c_id">c_id:</label>
+              <input type="number" class="form-control" id="c_id" name="c_id" pattern="^[a-zA-Z0-9\s]{3,}$" required title="Enter integer values">
+              value=" // if($_SESSION['res'] == 1){echo htmlspecialchars($_SESSION['c_Client']);}else{echo"AaaaaAssss";}?> "
+        </div>	-->
 		
-	
-		</div>
-	
-	</div>    
- 	
-				
-	 
-</body>
-
-
-
-
-   
-
-    <!-- Bootsrap javascript file -->
-    <script src="assets/js/bootstrap.min.js"></script>
+		<div class="form-group input-field col-md-4">
+              <label for="c_Client">c_Client:</label>
+              <input type="text" class="form-control" id="c_Client" name="c_Client" pattern="[A-Z]([A-Z0-9]*[a-z][a-z0-9]*[A-Z]|[a-z0-9]*[A-Z][A-Z0-9]*[a-z])[A-Za-z0-9]*" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_Client']);}else{echo '';}?>" title="Enter in CamelCase e.g SouthAmerica">
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_ClientType">c_ClientType:</label>
+              <input type="text" class="form-control" id="c_ClientType" name="c_ClientType" pattern="[a-zA-Z0-9_\s]{0,}$" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_ClientType']);}else{echo '';}?>" >
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_Description">c_Description:</label>
+              <input type="text" class="form-control" id="c_Description" name="c_Description" pattern="[a-zA-Z0-9_\s]{0,}$" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_Description']);}else{echo '';}?>">
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_ShortName">c_ShortName:</label>
+              <input type="text" class="form-control" id="c_ShortName" name="c_ShortName" patternn="^[A-Z]{3}$" title="Uppercase only without spaces, LIMIT 3 CHARACTERS e.g ABC" title="Uppercase only e.g ABC" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_ShortName']);}else{echo '';}?>">
+              
+        </div>
+			
+		<div class="form-group input-field col-md-4">
+              <label for="c_Country">c_Country:</label>
+              <input type="text" class="form-control" id="c_Country" name="c_Country" pattern="[A-Z\_s]{0,}" title="Uppercase only e.g ABC" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_Country']);}else{echo '';}?>">
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_Location">c_Location:</label>
+              <input type="text" class="form-control" id="c_Location" name="c_Location" pattern="[A-Z\_s]{0,}" title="Uppercase only e.g ABC" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_Location']);}else{echo '';}?>">
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_OtherDetails">c_OtherDetails:</label>
+              <input type="text" class="form-control" id="c_OtherDetails" name="c_OtherDetails" pattern="[a-zA-Z0-9_\s]{0,}" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_OtherDetails']);}else{echo '';}?>">
+           
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_EffectiveDate">c_EffectiveDate:</label>
+              <input type="text" class="form-control" id="c_EffectiveDate" name="c_EffectiveDate" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="Enter in yyyy-mm-dd format (1990's or 2000's)" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_EffectiveDate']);}else{echo '';}?>">
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_EndDate">c_EndDate:</label>
+              <input type="text" class="form-control" id="c_EndDate" name="c_EndDate" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="Enter in yyyy-mm-dd format (1990's or 2000's)" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_EndDate']);}else{echo '';}?>">
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_CreateDate">c_CreateDate:</label>
+              <input type="text" class="form-control" id="c_CreateDate" name="c_CreateDate" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="Enter in yyyy-mm-dd format (1990's or 2000's)" value="<?php if($_SESSION['add_clients_flag']==0){echo htmlspecialchars($_SESSION['c_CreateDate']);}else{echo '';}?>">
+              
+        </div>
+		
+		<div class="form-group input-field col-md-4">
+              <label for="c_ActiveFlag">c_ActiveFlag:</label>
+              <input type="text" class="form-control" id="c_ActiveFlag" name="c_ActiveFlag" pattern="[0-1]{1}" title="Please enter either 0 or 1" value="1">
+              
+        </div>
+		
+		
+		
+        
+	</div>
+		<button type="submit" name="submit" class="btn btn-default">Move to client_load_template</button>
+	<!-- <input type="submit" value="Add" name="submit" class="waves-effect waves-light btn" ></input> -->
+      </form>
+    </div>
     
+</div>
+</div>
 
-</html>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('select').material_select();
+  });
+
+
+
+var $form = $("form"),
+$successMsg = $(".alert");
+$form.validator().on("submit", function(e){
+if(!e.isDefaultPrevented()){
+  e.preventDefault();
+  $successMsg.show();
+}
+});

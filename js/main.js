@@ -53,8 +53,15 @@ var dashboard_build_variable_values;
 	  	//htmlstr = htmlstr+"<tr><td> "+item['cft_id']+ " </td><td>"+item['cft_Delimeter']+"<td><td>"+item['ind_FileName']+"<td></tr>";
 		$('#table').append("<tr><td>"+item['cft_id']+ "</td><td>"+item['cft_Delimeter']+"</td><td>"+item['ind_FileName']+"</td></tr>");
 	}
+	
+	
+	
+	
 		function show_build_info(){
-			//alert($('#client_select').find('option:selected').attr("value"));
+			alert($('#client_select option:selected').val());
+			set_session_variable('client_name',$('#client_select option:selected').val());
+			
+			
 			$.ajax({
 				url: 'ajax/ajax_get_single_row_from_database.php',
 				type: 'POST',

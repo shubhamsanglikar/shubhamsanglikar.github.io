@@ -1,0 +1,98 @@
+select distinct	ci.c_id as ClientId
+,	ci.c_Client as Client
+,	ci.c_ShortName as ClientShortName
+,	ci.c_Country as Country
+,	ci.c_Location as Location
+,	ci.c_ActiveFlag as ClientActiveStatus
+,	clt.clt_no as ClientLoadTemplateNo
+,	clt.clt_id as ClientLoadTemplateId
+,	clt_FileConvention as LoadTemplateFileConvention
+,	clt_FileDescription as LoadTemplateFileDescription
+,	clt_CDMSBatch as CDMSBatch
+,	clt_ReceiveFrequency as FileReceiveFrequency
+,	clt_LoadFrequency as LoadFrequency
+,	clt_WFilePath as LoadTemplateWorkingFilePath
+,	clt_SFilePath as LoadTemplateStagingFilePath
+,	clt_filetype as LoadTemplateFileType
+,	clt_TableName as LoadTemplateTableNamingConvention
+,	clt_DataBaseName as LoadTemplateDataBaseNamingConvention
+,	clt_FileEncoding as LoadTemplateFileEncoding
+,	clt_LRFilePath as LoadReadyFilePath
+,	clt_IsActive as LoadTemplateActiveStatus
+,	clt_ViewName as LoadTemplateViewNamingConvention
+,	cft.cft_id as ClientFilesTemplateId
+,	cft_FileConvention as FilesTemplateConvention
+,	cft_DataItem as FilesTemplateDataItemName
+,   case 
+		when cft.cft_IsPositional = 1 then 'Positional' 
+		when cft.cft_IsEBCDIC then 'EBCDIC' 
+		when cft.cft_IsOracleDMP = 1 then cft.cft_OracleDMPType 
+		when cft.cft_IsMultiSchema = 1 then 'MultiSchemaFile' 
+		when cft.cft_IsDelimited = 1 then concat('Delimited - ',  cft.cft_Delimiter)  
+		when cft.cft_IsReportImage = 1 then 'ReportImage' 
+		when cft.cft_IsX12 = 1 then 'X12' 
+		when cft.cft_IsEDIFACT = 1 then 'EDIFACT' 
+		when cft.cft_IsFoxpro = 1 then 'FOXPRO'
+		when cft.cft_IsSaveFile = 1 then 'SAVEFILE'
+    end as FileType 
+,	cft_RecordLength as EBCDICRecordLength
+,	cft_TableName as FilesTemplateTableNamingConvention
+,	cft_IsActive as FilesTemplateActiveStatus
+,	cfi.cfi_id as ClientFilesInventoryId
+,	cfi_FileName as InventoryFileName
+,	cfi_type as InventoryType
+,	cfi_SFilePath as InventoryStagingPath
+,	cfi_WFilePath as InventoryWorkingPath
+,	cfi_IsEncrypted as InventoryEncrypted
+,	cfi_IsCcompressed as InventoryCompressed
+,	cfi_AfterDecryptName 
+,	cfi_AfterExtractedName
+,	cfi_filedate as InventoryFileDate
+,	cfi_LastLoadDate as LastLoadDate
+,	cfi_FileSize as FileSize
+,	cfi_IsActive as InventoryActiveStatus
+,	ind_id as InventoryDetailId
+,	ind_FileName as InventoryDetailFileName
+,	ind_Type as InventoryDetailType
+,	ind_WFilePath as InventoryDetailWorkingFilePath
+,	ind_Status as InventoryDetailStatus
+,	ind_filedate as InventoryDetailFileDate
+,	ind_FileSize as InventoryDetailFileSize
+,	ind_DataBaseName as InventoryDetailDatabaseName
+,	ind_TableName as InventoryDetailTableName
+,	ind_LoadDate as InventoryDetailLoadDate
+,	ind_TotalRecords as TotalRecords
+,	ind_RecordsProcessed as TotalRecordsProcessed
+,	ind_RecordsLoaded as TotalRecordsLoaded
+,	ind_RejectedFilePath as RejectedFilePath
+,	ind_ViewName as ViewName
+,	ind_IsActive as InventoryDetailActiveStatus
+,	ind_RecordsRejected as TotalRecordsRejected
+,   cbi.cbi_id as BuildId
+,   cbi.cbi_build_name as BuildName
+,   cbi.cbi_build_frequency as BuildFrequency
+,   cbti.cbt_BuildRequestId as RequestId
+,   cbti.cbt_Run_id as RunId
+,   cbti.cbt_TableName as BuildTableName
+,   cbti.cbt_TableType as BuildTableType
+,   cbti.cbt_RecordCount as BuildTableRecordCount
+,   cbti.cbt_DatabaseName as BuildDatabaseName
+,   cbid.cbd_ScriptStart_TimeStamp as ScriptStartTime
+,   cbid.cbd_ScriptEnd_TimeStamp as ScriptEndTime
+,   cbid.cbl_ScriptName as ScriptName
+,   cbid.cbl_LogFileLoc as LogFileLocation
+,   cbid.cbl_ServiceId as UserId
+,   cbid.cbl_Error_cd as ErrorCode
+,   cbid.cbl_Error_msg as ErrorMessage
+ from 	
+Client_Info ci	
+left join Client_Load_Template clt on clt.c_id=ci.c_id	
+left join Client_Files_Template cft on cft.clt_id = clt.clt_id and cft.clt_no = clt.clt_no	
+left join Client_Files_Inventory cfi on cfi.clt_id = clt.clt_id and cfi.clt_no=cft.clt_no	
+left join Client_Inventory_Details cid on cid.clt_id = clt.clt_id and cid.cft_id=cft.cft_id and cid.cfi_id=cfi.cfi_id and cid.clt_no=cfi.clt_no	
+left join Client_Build_Info cbi on cbi.c_id = ci.c_id	
+left join Client_Build_Table_Info cbti on cbti.cbi_id = cbi.cbi_id	
+left join Client_Build_Info_Detail cbid on cbid.cbi_id = cbi.cbi_id 	
+and cbti.cbt_Run_Id = cbid.cbj_RunId	
+left join Client_Build_File_Xref cbfx on cbfx.cbi_id = cbi.cbi_id and cbfx.cft_id = cft.cft_id
+where ci.c_Client='Amazon'

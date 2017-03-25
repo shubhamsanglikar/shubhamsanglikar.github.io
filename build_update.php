@@ -59,11 +59,11 @@ extract($_POST);
 						$q="select distinct c_id, c_Client from client_info";
 						$c=mysql_query($q);
 			
-						echo "<select id='client_select' name='client_select' class='browser-default'>";
+						echo "<select id='client_select' name='client_select' onchange='addBuildName(this,\"build_name_select\")' class='browser-default'>";
 						while($row=mysql_fetch_array($c))
 						{
 				
-							echo "<option onclick='addBuildName(this,\"build_name_select\")' value=".$row['c_id']." >".$row['c_Client']."</option>";
+							echo "<option value=".$row['c_id']." >".$row['c_Client']."</option>";
 
 						}
 						echo "</select>";

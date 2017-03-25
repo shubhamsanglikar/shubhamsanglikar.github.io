@@ -3,7 +3,7 @@
 
 var username="not assigned";
 function autocomplet(temp) {
-	var min_length = 0; // min caracters to display the autocomplete
+	var min_length = 1; // min caracters to display the autocomplete
 	var keyword = $('#country_id').val();
 	if (keyword.length >= min_length) {
 		$.ajax({
