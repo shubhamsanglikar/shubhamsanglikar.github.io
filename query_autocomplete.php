@@ -79,7 +79,7 @@ function get_selection(){
 
 function set_selection(no){
 //alert("safda");
-//$(".listbox-selected").removeClass('listbox-selected');
+$(".listbox-selected").removeClass('listbox-selected');
 	$('.listbox').each(function(i,obj) {
 	//alert("inside"+i+" "+no);
 		if(i==no){
@@ -101,7 +101,8 @@ function checkKey(e) {
         // up arrow
 		//alert("upkey");
 		//get_selection();
-		setTimeout(function(){ set_selection(current_selection-1);}, 300);
+		set_selection(current_selection-1);
+		$("#debug_div").html($("#debug_div").html()+"*");
 		kuflag=1;
 		
     }
@@ -109,7 +110,8 @@ function checkKey(e) {
         // down arrow
 		//alert("dkey"+ current_selection);
 		//get_selection();
-		setTimeout(function(){ set_selection(current_selection+1);}, 300);
+		set_selection(current_selection+1);
+		$("#debug_div").html($("#debug_div").html()+"*");
 		kdflag=1;
 		
     }
@@ -319,7 +321,7 @@ function suggest() {
 	partial_str = keyword.substring(0,temp);
 	current_word = keyword.substring(temp+1);
 	status = check_status();
-	$('#debug_div').html("status: "+status);
+	//$('#debug_div').html("status: "+status);
 	if(status==0)
 	{
 		suggest_word(current_word,"alias_name");
